@@ -1,9 +1,11 @@
 package com.example.sqliteexample;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity implements HomeFragment.OnDbOpListener{
+public class MainActivity extends AppCompatActivity implements ReadContactFragment.OnDbOpListener,AddContactFragment.OnDbOpListener,UpdateContactFragment.OnDbOpListener,
+        DeleteContactFragment.OnDbOpListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,8 +16,10 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.OnDb
             if(savedInstanceState!=null){
                 return;
             }
-            HomeFragment homeFragment=new HomeFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,homeFragment).commit();
+
+            ReadContactFragment readContactFragment= new ReadContactFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,readContactFragment).commit();
+
         }
     }
 

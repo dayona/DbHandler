@@ -1,6 +1,8 @@
 package com.example.sqliteexample;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,9 +17,11 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddContactFragment extends Fragment  {
+public class AddContactFragment extends Fragment {
     Button bnSave;
     EditText Id,Name,Email;
+    OnDbOpListener dbOpListener;
+
 
 
     public AddContactFragment() {
@@ -51,10 +55,28 @@ public class AddContactFragment extends Fragment  {
                 Name.setText("");
                 Email.setText("");
 
+
                 Toast.makeText(getActivity(),"Contact Saved Successfully",Toast.LENGTH_SHORT).show();
+                dbOpListener.dbOpPerformed(1);
+
+
+
             }
         });
         return view;
     }
+    public interface OnDbOpListener{
+        public void dbOpPerformed(int method);
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        Activity activity=(Activity) context;
+        dbOpListener=(OnDbOpListener) activity;
+
+    }
+
 
 }

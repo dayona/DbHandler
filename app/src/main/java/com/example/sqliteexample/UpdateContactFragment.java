@@ -1,6 +1,8 @@
 package com.example.sqliteexample;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ public class UpdateContactFragment extends Fragment {
     public TextView TvUpddate;
     public EditText EvName, EvId, EvEmail;
     public Button BnUpdate;
+    OnDbOpListener dbOpListener;
 
     public UpdateContactFragment() {
         // Required empty public constructor
@@ -51,11 +54,30 @@ public class UpdateContactFragment extends Fragment {
                 EvId.setText(" ");
                 EvName.setText(" ");
                 EvEmail.setText(" ");
+
+                dbOpListener.dbOpPerformed(1);
+
+
             }
         });
 
 
         return view;
     }
+
+    public interface OnDbOpListener{
+        public void dbOpPerformed(int method);
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        Activity activity=(Activity) context;
+        dbOpListener=(OnDbOpListener) activity;
+
+    }
+
+
 
 }

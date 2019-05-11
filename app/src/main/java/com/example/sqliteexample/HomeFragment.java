@@ -30,17 +30,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.bn_add_contact:
                 dbOpListener.dbOpPerformed(0);
                 break;
-            case R.id.bn_view_contact:
-                dbOpListener.dbOpPerformed(1);
-                break;
+//            case R.id.bn_view_contact:
+//                dbOpListener.dbOpPerformed(1);
+//                break;
             case R.id.bn_update_contact:
+
                 dbOpListener.dbOpPerformed(2);
                 break;
             case R.id.bn_delete_contact:
                 dbOpListener.dbOpPerformed(3);
                 break;
         }
-            }
+    }
+
 
     public interface OnDbOpListener{
         public void dbOpPerformed(int method);
@@ -50,16 +52,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         BnSave= view.findViewById(R.id.bn_add_contact);
         BnSave.setOnClickListener(this);
-        BnView=view.findViewById(R.id.bn_view_contact);
-        BnView.setOnClickListener(this);
         BnUpdate=view.findViewById(R.id.bn_update_contact);
         BnUpdate.setOnClickListener(this);
         BnDelete=view.findViewById(R.id.bn_delete_contact);
         BnDelete.setOnClickListener(this);
+
         return view;
     }
 

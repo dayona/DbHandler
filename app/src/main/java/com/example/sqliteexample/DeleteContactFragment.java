@@ -1,6 +1,8 @@
 package com.example.sqliteexample;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ public class DeleteContactFragment extends Fragment {
 
         EditText DeleteContact;
         Button BnDelete;
+        OnDbOpListener dbOpListener;
 
     public DeleteContactFragment() {
         // Required empty public constructor
@@ -39,10 +42,25 @@ public class DeleteContactFragment extends Fragment {
                 SQLiteDatabase database= contactDbHelper.getWritableDatabase();
                 contactDbHelper.deleteContact(Integer.parseInt(Contact_id),database);
                 DeleteContact.setText("");
+                dbOpListener.dbOpPerformed(1);
+
             }
         });
 
         return view;
+    }
+
+    public interface OnDbOpListener{
+        public void dbOpPerformed(int method);
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        Activity activity=(Activity) context;
+        dbOpListener=(OnDbOpListener) activity;
+
     }
 
 }
